@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^16.2.0",
+    "@angular/animations": "^16.2.12",
     "@angular/cdk": "^16.2.12",
     "@angular/common": "^16.2.0",
     "@angular/compiler": "^16.2.0",
@@ -29,6 +29,7 @@
     "jquery": "^3.7.1",
     "lightgallery": "^2.7.2",
     "ngx-lightbox": "^3.0.0",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
@@ -37,6 +38,7 @@
     "@angular-devkit/build-angular": "^16.2.11",
     "@angular/cli": "^16.2.11",
     "@angular/compiler-cli": "^16.2.0",
+    "@types/bootstrap": "^5.2.10",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",

@@ -26,6 +26,8 @@ import {  MatCardModule} from '@angular/material/card';
 import { WhatsappShareButtonComponent } from './whatsapp-share-button/whatsapp-share-button.component';
 import { UserEventRegisteredComponent } from './user-event-registered/user-event-registered.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
+import { ToastComponent } from './toast/toast.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     WhatsappShareButtonComponent,
     UserEventRegisteredComponent,
     SideBarComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { SideBarComponent } from './side-bar/side-bar.component';
     MatDialogModule,
     MatCardModule,
     LightboxModule,
-    LightgalleryModule
+    LightgalleryModule,
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [],
   bootstrap: [AppComponent]

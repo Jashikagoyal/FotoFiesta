@@ -27,6 +27,7 @@ export class EventListService {
     this.httpClient
       .get(
         'http://localhost:8000/getUserEvents/',
+        // 'https://helpful-range-403908.el.r.appspot.com/getHastagList/',
         requestOptions
       )
       .subscribe(

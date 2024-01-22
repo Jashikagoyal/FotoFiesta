@@ -85,7 +85,7 @@ export class UploadComponent {
       this.selectedFiles.push(file);
     }
   }
-  
+   
   imageSubscription(event_name: string) {
     const data = { folder_name: event_name};
     this.httpClient

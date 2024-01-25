@@ -39,6 +39,19 @@ export class RegisterationComponent {
   showOTPField: boolean = false;
   response_data: any;
   message: string = ''
+  showToast: boolean = false;
+  toastMessage: string = '';
+  toastType: string = "";
+
+  // Function to show the toast
+  showToastMessage(message: string, type: string) {
+    this.toastMessage = message;
+    this.toastType = type
+    this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000);
+  }
 
   onRegistration() {
     // Handle the registration submission here
@@ -64,7 +77,8 @@ export class RegisterationComponent {
         // Handle the error case here
         if (error.status === 409) {
           console.log('User already exist');
-          alert(" User already exist Please Login")
+          // alert(" User already exist Please Login")
+          this.showToastMessage("User already exist Please Login", "error")
           this.showOTPField = false;
           this.onSignInClick();
           // Handle the case where the user is not found
@@ -81,14 +95,19 @@ export class RegisterationComponent {
     if (this.otp && this.otp != '') {
       if (this.otp == this.response_data.otp) {
         this.userDataService.setUserDataInitial = this.response_data;
-        alert('congratulations');
+        // alert('congratulations');
+        this.showToastMessage("Login Successful", "success");
         localStorage.setItem('authToken', this.response_data.auth_token);
         localStorage.setItem('Mobile_Number', this.response_data.mobile);
-        this.router.navigate(['admin/dashboard/event_list']);
+        setTimeout(() => {
+          this.router.navigate(['admin/dashboard/event_list']);
+        }, 1);
       } else if (this.otp.length < 6) {
-        alert('please enter 6 digit otp')
+        this.showToastMessage('please enter 6 digit otp', "info")
+        // alert('please enter 6 digit otp')
       } else {
-        alert('please enter correct otp');
+        // alert('please enter correct otp');
+        this.showToastMessage('please enter correct otp', "info")
       }
     }
   }
@@ -125,7 +144,8 @@ export class RegisterationComponent {
         console.log(error)
         if (error.status === 404) {
           console.log('User not found');
-          alert("User not registered")
+          this.showToastMessage("User not registered", "error")
+          // alert("User not registered")
           this.onSignUpClick()
           this.showOTPField = false;
           // Handle the case where the user is not found

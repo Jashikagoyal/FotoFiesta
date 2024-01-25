@@ -8,24 +8,38 @@ import { IndividualConfig, ToastrService } from 'ngx-toastr';
 })
 export class ToastComponent {
   @Input() message: string | undefined;
+  @Input() toastType: string | undefined;
 
   constructor(private toastr: ToastrService) {}
 
   ngOnInit(): void {
-    this.showSuccess()
+    this.showToast()
   }
-
-  showSuccess() {
+  showToast() {
     const toastrConfig: Partial<IndividualConfig> = {
       closeButton: true,
       progressBar: true,
-      timeOut: 10000,
-      toastClass: 'ngx-toastr custom-toastr'
+      timeOut: 5000,
+      // toastClass: 'yourclass ngx-toastr yourclass',
       // toastClass: 'custom-toastr',
       // other configuration options...
     };
-
-    this.toastr.success(this.message, 'Your title', toastrConfig);
+    if (this.toastType=="success"){
+      this.toastr.success(this.message, '', toastrConfig);
+    }
+    else if(this.toastType=="error"){
+      this.toastr.error(this.message, '', toastrConfig);
+    }
+    else if(this.toastType=="info"){
+      this.toastr.info(this.message, '', toastrConfig);
+    }
+    else if(this.toastType=="warning"){
+      this.toastr.warning(this.message, '', toastrConfig);
+    }
+    else{
+      this.toastr.show(this.message, '', toastrConfig);
+    }
+    
   }
 
   // showSuccess() {

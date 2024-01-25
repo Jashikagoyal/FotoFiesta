@@ -68,11 +68,16 @@ export class UploadComponent {
 
   showToast: boolean = false;
   toastMessage: string = '';
+  toastType: string = '';
 
   // Function to show the toast
-  showNotification(message: string) {
+  showToastMessage(message: string, type: string) {
     this.toastMessage = message;
+    this.toastType = type
     this.showToast = true;
+    setTimeout(() => {
+      this.showToast = false;
+    }, 5000);
   }
 
   onFileSelected(event: any) {
@@ -147,14 +152,15 @@ export class UploadComponent {
     //   alert("You are attempting to upload more images")
     //   return
     // }
-    if (this.selectedFiles.length === 0) {
+    if (this.event_id.length <= 0) {
+      this.errorText = "Please select Event ID";
+      return
+    }
+    else if (this.selectedFiles.length === 0) {
       this.errorText = "Please select atleast one file";
       return
     } else if (this.selectedFiles.length > this.imagePerEventLimit - this.imageLength) {
-      this.errorText = "You are attempting to upload more images";
-      return
-    } else if (this.event_id.length <= 0) {
-      this.errorText = "Please select Event ID";
+      this.errorText = "You are attempting to upload more images than your subscription limit allows";
       return
     } else {
       this.errorText = null; 
@@ -163,7 +169,7 @@ export class UploadComponent {
     var count = 0;
     var current_size = 0;
     const maxSize = 3*1024*1024
-    this.showNotification("Images Uploaded Successfully")
+    this.showToastMessage("Images Uploaded Successfully","success")
     // alert("form is submitted")
     for (let i = 0; i < this.selectedFiles.length; i++) {
       var file = this.selectedFiles[i];

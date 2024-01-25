@@ -9,7 +9,7 @@ li.nav-item {
 .container.header-content, .container.features-content, .container.plans-pricing__content, .container.about-us, .container.footer-content{
     margin: 0 auto;
     padding: 0 15px;
-    max-width: 940px;
+    max-width: 1200px;
     width: 100%;
 }
 

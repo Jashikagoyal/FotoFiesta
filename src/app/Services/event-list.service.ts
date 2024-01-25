@@ -36,7 +36,7 @@ export class EventListService {
             this.event = response;
             this.event_list = this.event.data;
             // this.isLoading = false;
-            console.log("event list : ",this.event_list)
+            // console.log("event list : ",this.event_list)
             this._eventListSubject.next(this.event_list);
             this._eventSubject.next(this.event);
             // console.log(response)

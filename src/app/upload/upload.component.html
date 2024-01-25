@@ -1,5 +1,3 @@
-<!-- <p>upload works!</p> -->
-
 <app-dashboard></app-dashboard>
 
 <div class="container">
@@ -74,7 +72,7 @@
     </form>
     
     <!-- <button (click)="showNotification('hello')">hello</button> -->
-    <app-toast *ngIf="showToast" [message]="toastMessage"></app-toast>
+    <app-toast *ngIf="showToast" [message]="toastMessage"[toastType]="toastType"></app-toast>
 
   </div>
 </div>

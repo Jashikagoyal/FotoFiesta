@@ -17,7 +17,9 @@ import { combineLatest, forkJoin } from 'rxjs';
 export class CreateEventComponent {
 
   create_event = false;
+  event_limit_dialouge = false;
   create_event_success = false;
+  isLoading: boolean = true;
 
   eventForm: FormGroup;
   constructor(
@@ -52,13 +54,18 @@ export class CreateEventComponent {
         this.eventLimit = activeSubscription[0].event_limit;
         console.log("eventLimit:", this.eventLimit);
       }
-  
+
       console.log("eventLimit:", this.eventLimit);
       console.log("noOfEvents:", this.noOfEvents);
-  
+
       if (this.eventLimit !== undefined && this.noOfEvents !== undefined && this.eventLimit > this.noOfEvents) {
         this.create_event = true;
+        this.isLoading = false;
         console.log("create_event set to true");
+      }
+      if (this.eventLimit !== undefined && this.noOfEvents !== undefined && this.eventLimit <= this.noOfEvents) {
+        this.event_limit_dialouge = true;
+        this.isLoading = false;
       }
     });
   }

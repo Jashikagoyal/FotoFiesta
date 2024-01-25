@@ -169,7 +169,7 @@ export class UploadComponent {
     var count = 0;
     var current_size = 0;
     const maxSize = 3*1024*1024
-    this.showToastMessage("Images Uploaded Successfully","success")
+    this.showToastMessage("Images Uploaded Successfully","success");
     // alert("form is submitted")
     for (let i = 0; i < this.selectedFiles.length; i++) {
       var file = this.selectedFiles[i];

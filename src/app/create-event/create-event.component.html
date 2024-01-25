@@ -2,6 +2,9 @@
 
 <!-- <app-dashboard></app-dashboard> -->
 <app-navbar></app-navbar>
+<div class="loader-container" *ngIf="isLoading">
+  <div class="loader"></div>
+</div>
 <div class="container">
   <div class="row mt-3" *ngIf="create_event">
     <div class="row mt-3" *ngIf="create_event_success">
@@ -34,7 +37,7 @@
       </form>
     </div>
   </div>
-  <div *ngIf="!create_event">
+  <div *ngIf="event_limit_dialouge">
     <!-- <h1>your limit expired Upgrade to create more events </h1> -->
     <!-- Vertically centered modal -->
     <div class="card text-center">

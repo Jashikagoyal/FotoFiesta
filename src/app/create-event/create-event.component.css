@@ -2,3 +2,11 @@
     margin-bottom: 0.5rem;
     font-size: larger;
 }
+
+p.card-text {
+    padding: 10px 40px 10px 40px;
+}
+
+.card.text-center {
+    margin: 90px 120px 0px 120px;
+}

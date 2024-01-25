@@ -74,6 +74,7 @@
         </div>
     </div>
 </div>
+<app-toast *ngIf="showToast" [message]="toastMessage" [toastType]="toastType"></app-toast>
 <div *ngIf="isAuthenticated">
     <app-dashboard></app-dashboard>
 </div>

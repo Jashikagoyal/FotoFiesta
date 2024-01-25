@@ -3,46 +3,78 @@
 <app-dashboard></app-dashboard>
 
 <div class="container">
-<div class="row mt-3 col-md-6">
-  <h2>Upload Images</h2>
-  <form (ngSubmit)="uploadFiles()">
-    <!-- <div class="form-group">
-      <label for="appName">App Name</label>
-      <input type="text" id="appName" name="appName" placeholder="App Name" value="{{ appname }}" readonly="true"
-        class="form-control" />
-    </div> -->
-    <div class="form-group custom-dropdown">
-      <label for="eventId">Event ID</label>
-      <select id="eventId" name="eventId" [(ngModel)]="event_id" class="form-control">
-        <option value="" disabled selected>Select Event ID</option>
-        <option *ngFor="let e of listOfEvent" [value]="e.event_id">{{ e.event_id }}</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="tag">Tag</label>
-      <input type="text" id="tag" name="tag" [(ngModel)]="tag" placeholder="Tag" required="true" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label for="file">Select Files</label> <br>
-      <input type="file" id="file" (change)="onFileSelected($event)" multiple class="form-control-file" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Upload</button>
-
-    <div class="file-preview mt-3" *ngFor="let file of selectedFiles; let i = index">
-      <ng-container *ngIf="file.type.includes('image'); else fileIcon">
-        <img src="" alt="Preview" />
-      </ng-container>
-      <ng-template #fileIcon>
-        <i class="fa fa-file-o"></i>
-      </ng-template>
-      <div class="file-info">
-        <p>{{ file.name }}</p>
-        <p>{{ formatBytes(file.size) }}</p>
+  <div class="row mt-3">
+    <div id="upload-image">
+      <div class="col-md-6">
+        <h2 style="text-align: left;">Upload Images</h2>
       </div>
-      <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+      <div class="col-md-6">
+        <h2 style="text-align: right;">Remaining Upload Quota : {{this.imagePerEventLimit - this.imageLength}}</h2>
+      </div>
     </div>
-  </form>
-</div>
+  </div>
+
+  <div class="row mt-3 col-md-6">
+    <form (ngSubmit)="uploadFiles()" [formGroup]="uploadForm">
+
+      <div class="form-group" *ngIf="errorText">
+        <p class="text-danger">{{ errorText }}</p>
+      </div>
+
+      <div class="form-group custom-dropdown">
+        <label for="eventId">Event ID</label>
+        <select id="eventId" name="eventId" formControlName="eventId" class="form-control" [(ngModel)]="event_id"
+          (change)="imageSubscription(event_id)">
+          <option value="Select Event ID" disabled selected>Select Event ID</option>
+          <option *ngFor="let e of listOfEvent" [value]="e.event_id">{{ e.event_id }}</option>
+        </select>
+        <div *ngIf="uploadForm.get('eventId')!.hasError('required') && uploadForm.get('eventId')!.touched">
+          <p class="text-danger">Please select event Id</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tag">Tag</label>
+        <input type="text" id="tag" name="tag" [(ngModel)]="tag" placeholder="Tag" formControlName="tag"
+          class="form-control" />
+        <div *ngIf="uploadForm.get('tag')!.hasError('required') && uploadForm.get('tag')!.touched">
+          <p class="text-danger">Tag is required</p>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="file">Select Files</label> <br>
+        <input type="file" id="file" (change)="onFileSelected($event)" multiple class="form-control-file" />
+        <div>
+          <button type="submit" class="btn btn-primary" >Upload</button>
+        </div>
+      </div>
+      <!-- <div class="form-group" *ngIf="selectedFiles.length > this.imagePerEventLimit - this.imageLength">
+        <label for="file">Select Files</label> <br>
+        <input type="file" id="file" (change)="onFileSelected($event)" multiple class="form-control-file" disabled />
+        <div>
+          <button type="submit" class="btn btn-primary" [disabled]="!uploadForm.valid">Upload</button>
+        </div>
+        <p class="text-danger">You are attempting to upload more images than your subscription limit allows.</p>
+      </div> -->
+      <div class="file-preview mt-3" *ngFor="let file of selectedFiles; let i = index">
+        <ng-container *ngIf="file.type.includes('image'); else fileIcon">
+          <img src="" alt="Preview" />
+        </ng-container>
+        <ng-template #fileIcon>
+          <i class="fa fa-file-o"></i>
+        </ng-template>
+        <div class="file-info">
+          <p>{{ file.name }}</p>
+          <p>{{ formatBytes(file.size) }}</p>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="uploadProgress"></mat-progress-bar>
+      </div>
+    </form>
+    
+    <!-- <button (click)="showNotification('hello')">hello</button> -->
+    <app-toast *ngIf="showToast" [message]="toastMessage"></app-toast>
+
+  </div>
 </div>

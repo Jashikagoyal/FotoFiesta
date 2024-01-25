@@ -72,7 +72,8 @@ export class EventListComponent {
 
     this.httpClient
       .post(
-        'https://helpful-range-403908.el.r.appspot.com/downloadFroms3/',
+        // 'https://helpful-range-403908.el.r.appspot.com/downloadFroms3/',
+        this.app_component.base_url + 'downloadFroms3/',
         data,
         requestOptions
       )

@@ -35,6 +35,21 @@
     </div>
   </div>
   <div *ngIf="!create_event">
-    <h1>your limit expired Upgrade to create more events </h1>
+    <!-- <h1>your limit expired Upgrade to create more events </h1> -->
+    <!-- Vertically centered modal -->
+    <div class="card text-center">
+      <div class="card-header">
+        Your Limit Expired
+      </div>
+      <div class="card-body">
+        <!-- <h5 class="card-title">Your Limit Expired</h5> -->
+        <p class="card-text">Kindly be informed that your current access limit has expired. To unlock additional event creation
+          capabilities, we recommend upgrading your account by clicking on the Pricing button</p>
+        <a class="btn btn-primary" [routerLink]="['/admin/dashboard/pricing']">Pricing</a>
+      </div>
+      <div class="card-footer text-muted">
+        Update Your Limit
+      </div>
+    </div>
   </div>
 </div>
